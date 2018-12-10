@@ -1,0 +1,143 @@
+﻿public virtual DbSet<T_COMP_INFO> T_COMP_INFO { get; set; }
+public virtual DbSet<T_VULN> T_VULN { get; set; }
+public virtual DbSet<T_VULN_GROUP> T_VULN_GROUP { get; set; }
+
+
+
+modelBuilder.Entity<T_COMP_INFO>(entity =>
+{
+    entity.HasKey(e => e.COMP_SEQ);
+
+    entity.Property(e => e.COMP_DESCRIPTION).HasMaxLength(1024);
+
+    entity.Property(e => e.COMP_DETAIL_GUBUN)
+        .HasMaxLength(32)
+        .HasDefaultValueSql("('')");
+
+    entity.Property(e => e.COMP_NAME)
+        .IsRequired()
+        .HasMaxLength(128);
+
+    entity.Property(e => e.COMP_REF).HasMaxLength(256);
+
+    entity.Property(e => e.CREATE_DT).HasColumnType("datetime");
+
+    entity.Property(e => e.CREATE_USER_ID).HasMaxLength(16);
+
+    entity.Property(e => e.DIAG_TYPE)
+        .IsRequired()
+        .HasMaxLength(32);
+
+    entity.Property(e => e.STANDARD_YEAR).HasMaxLength(4);
+
+    entity.Property(e => e.UPDATE_DT).HasColumnType("datetime");
+
+    entity.Property(e => e.UPDATE_USER_ID).HasMaxLength(16);
+});
+
+modelBuilder.Entity<T_VULN>(entity =>
+{
+    entity.HasKey(e => e.VULN_SEQ);
+
+    entity.Property(e => e.APPLY_TARGET).HasMaxLength(1024);
+
+    entity.Property(e => e.APPLY_TIME).HasMaxLength(2);
+
+    entity.Property(e => e.CLIENT_STANDARD_ID).HasMaxLength(32);
+
+    entity.Property(e => e.CREATE_DT).HasColumnType("datetime");
+
+    entity.Property(e => e.CREATE_USER_ID).HasMaxLength(16);
+
+    entity.Property(e => e.DETAIL).HasColumnType("text");
+
+    entity.Property(e => e.DETAIL_PATH).HasMaxLength(256);
+
+    entity.Property(e => e.EFFECT).HasMaxLength(2048);
+
+    entity.Property(e => e.EXCEPT_CD).HasMaxLength(2);
+
+    entity.Property(e => e.EXCEPT_DT).HasColumnType("datetime");
+
+    entity.Property(e => e.EXCEPT_REASON).HasMaxLength(1024);
+
+    entity.Property(e => e.EXCEPT_TERM_FR).HasColumnType("datetime");
+
+    entity.Property(e => e.EXCEPT_TERM_TO).HasColumnType("datetime");
+
+    entity.Property(e => e.EXCEPT_TERM_TYPE).HasMaxLength(2);
+
+    entity.Property(e => e.EXCEPT_USER_ID).HasMaxLength(16);
+
+    entity.Property(e => e.JUDGEMENT).HasMaxLength(2048);
+
+    entity.Property(e => e.MANAGE_ID).HasMaxLength(32);
+
+    entity.Property(e => e.ORG_PARSER_CONTENTS).HasColumnType("text");
+
+    entity.Property(e => e.PARSER_CONTENTS).HasColumnType("text");
+
+    entity.Property(e => e.REFRRENCE).HasMaxLength(2048);
+
+    entity.Property(e => e.REMEDY).HasColumnType("text");
+
+    entity.Property(e => e.REMEDY_DETAIL).HasColumnType("text");
+
+    entity.Property(e => e.REMEDY_PATH).HasMaxLength(256);
+
+    entity.Property(e => e.UPDATE_DT).HasColumnType("datetime");
+
+    entity.Property(e => e.UPDATE_USER_ID).HasMaxLength(16);
+
+    entity.Property(e => e.VULGROUP).HasDefaultValueSql("((0))");
+
+    entity.Property(e => e.VULNO)
+        .HasMaxLength(32)
+        .HasDefaultValueSql("('')");
+
+    entity.Property(e => e.VULN_NAME).HasMaxLength(128);
+
+    entity.HasOne(d => d.GROUP_SEQNavigation)
+        .WithMany(p => p.T_VULN)
+        .HasForeignKey(d => d.GROUP_SEQ)
+        .OnDelete(DeleteBehavior.ClientSetNull)
+        .HasConstraintName("FK__T_VULN__GROUP_SE__04E4BC85");
+});
+
+modelBuilder.Entity<T_VULN_GROUP>(entity =>
+{
+    entity.HasKey(e => e.GROUP_SEQ);
+
+    entity.Property(e => e.GROUP_SEQ).ValueGeneratedNever();
+
+    entity.Property(e => e.CREATE_DT).HasColumnType("datetime");
+
+    entity.Property(e => e.CREATE_USER_ID).HasMaxLength(16);
+
+    entity.Property(e => e.DIAG_KIND).HasMaxLength(32);
+
+    entity.Property(e => e.DIAG_TERM).HasMaxLength(32);
+
+    entity.Property(e => e.DIAG_TOOL).HasMaxLength(32);
+
+    entity.Property(e => e.GROUP_ID).HasMaxLength(32);
+
+    entity.Property(e => e.GROUP_NAME).HasMaxLength(128);
+
+    entity.Property(e => e.GROUP_TYPE)
+        .IsRequired()
+        .HasMaxLength(32);
+
+    entity.Property(e => e.UPDATE_DT).HasColumnType("datetime");
+
+    entity.Property(e => e.UPDATE_USER_ID).HasMaxLength(16);
+
+    entity.HasOne(d => d.COMP_SEQNavigation)
+        .WithMany(p => p.T_VULN_GROUP)
+        .HasForeignKey(d => d.COMP_SEQ)
+        .OnDelete(DeleteBehavior.ClientSetNull)
+        .HasConstraintName("FK__T_VULN_GR__COMP___7F2BE32F");
+});
+
+
+=================================================================================================
