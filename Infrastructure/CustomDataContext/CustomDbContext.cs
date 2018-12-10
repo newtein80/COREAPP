@@ -1,4 +1,5 @@
 ﻿using System;
+using ApplicationCore.Entity.VulnModel;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Infrastructure.CustomDataContext
+namespace ApplicationCore.Entity.VulnModel
 {
     public partial class T_COMP_INFO
     {
