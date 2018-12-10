@@ -16,7 +16,7 @@ using Infrastructure.Identity;
 using System.Text;
 using ApplicationCore.Interface;
 using Infrastructure.Services;
-using Infrastructure.DataContext;
+using Infrastructure.SystemDataContext;
 
 namespace WebCore
 {

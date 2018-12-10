@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Infrastructure.DataContext
+namespace Infrastructure.SystemDataContext
 {
     /// <summary>
     /// "There's some repetition here - couldn't we have some the sync methods call the async?"

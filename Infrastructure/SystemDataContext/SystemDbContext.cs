@@ -3,7 +3,7 @@ using ApplicationCore.Entity.SystemModel;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace Infrastructure.DataContext
+namespace Infrastructure.SystemDataContext
 {
     public partial class SystemDbContext : DbContext
     {

@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Infrastructure.DataContext
+namespace Infrastructure.SystemDataContext
 {
     public class SpecificationEvaluator<T> where T : BaseEntity
     {
