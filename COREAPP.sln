@@ -3,11 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.136
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{28DE4483-4ED8-4B8E-A262-A460C923E92E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{28DE4483-4ED8-4B8E-A262-A460C923E92E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApplicationCore", "ApplicationCore\ApplicationCore.csproj", "{C70B1359-6D6B-4F9E-85BA-516830D79E0B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApplicationCore", "ApplicationCore\ApplicationCore.csproj", "{C70B1359-6D6B-4F9E-85BA-516830D79E0B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebCore", "WebCore\WebCore.csproj", "{FA140704-A6A6-400C-898A-AEF25D3E1028}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebCore", "WebCore\WebCore.csproj", "{FA140704-A6A6-400C-898A-AEF25D3E1028}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebCoreCustomIdentity", "WebCoreCustomIdentity\WebCoreCustomIdentity.csproj", "{BFBDBA56-940D-4AA8-BA76-E7A1C5A7A9A0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebCoreCreateAccount", "WebCoreCreateAccount\WebCoreCreateAccount.csproj", "{1C28337C-FA36-4355-B7FC-05FEDAF7481F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +31,14 @@ Global
 		{FA140704-A6A6-400C-898A-AEF25D3E1028}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FA140704-A6A6-400C-898A-AEF25D3E1028}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FA140704-A6A6-400C-898A-AEF25D3E1028}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BFBDBA56-940D-4AA8-BA76-E7A1C5A7A9A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BFBDBA56-940D-4AA8-BA76-E7A1C5A7A9A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BFBDBA56-940D-4AA8-BA76-E7A1C5A7A9A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BFBDBA56-940D-4AA8-BA76-E7A1C5A7A9A0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1C28337C-FA36-4355-B7FC-05FEDAF7481F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1C28337C-FA36-4355-B7FC-05FEDAF7481F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1C28337C-FA36-4355-B7FC-05FEDAF7481F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1C28337C-FA36-4355-B7FC-05FEDAF7481F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
