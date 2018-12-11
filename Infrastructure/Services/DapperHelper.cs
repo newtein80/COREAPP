@@ -13,6 +13,24 @@ namespace Infrastructure.Services
 {
     public static class DapperHelper
     {
+//https://www.learnmvc.in/crud-operation-with-dotnetcore-dapper.php
+//https://techbrij.com/asp-net-core-postgresql-dapper-crud
+//https://dotnetcorecentral.com/blog/asp-net-core-web-api-application-with-dapper-part-1/
+//https://dotnetcorecentral.com/blog/asp-net-core-web-api-application-with-dapper-part-2/
+//https://www.c-sharpcorner.com/article/crud-operations-in-asp-net-core-2-razor-page-with-dapper-and-repository-pattern/
+//http://www.mukeshkumar.net/articles/aspnetcore/asp-net-core-web-api-with-oracle-database-and-dapper
+//google : asp.net core dapper interface
+//https://stackoverflow.com/questions/50507382/store-retrieve-connectionstring-from-appsettings-json-in-asp-net-core-2-mvc-ap
+//https://stackoverflow.com/questions/46940710/getting-value-from-appsettings-json-in-net-core
+//https://www.codeproject.com/Articles/889668/SQL-Server-Dapper
+//https://stackoverflow.com/questions/47420522/read-appsettings-json-from-a-class-in-net-core-2
+//https://andrewlock.net/sharing-appsettings-json-configuration-files-between-projects-in-asp-net-core/
+//http://www.nullskull.com/a/10399923/sqlmapperhelper--a-helper-class-for-dapperdotnet.aspx
+//https://exceptionnotfound.net/using-dapper-asynchronously-in-asp-net-core-2-1/
+//https://stackoverflow.com/questions/35015066/passing-applications-connection-string-down-to-a-repository-class-library-in-as
+//https://stackoverflow.com/questions/9218847/how-do-i-handle-database-connections-with-dapper-in-net
+//google : dapper helper connection string, dapper connection string site:stackoverflow.com, asp.net core dapperhelper connection string, asp net core connection string manage
+
         //private static string connectionString = "Data Source=127.0.0.1;Initial Catalog=PJSWORK;User ID=sa;Password=#skdlf12;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
         private static string connectionString = "Data Source=PARKJS\\SQLEXPRESS;Initial Catalog=PJSWORK;User ID=sa;Password=#skdlf12;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
 
