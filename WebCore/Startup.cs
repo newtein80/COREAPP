@@ -17,6 +17,7 @@ using System.Text;
 using ApplicationCore.Interface;
 using Infrastructure.Services;
 using Infrastructure.SystemDataContext;
+using ApplicationCore.Entity;
 
 namespace WebCore
 {
@@ -37,6 +38,11 @@ namespace WebCore
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
+
+            //https://www.learnmvc.in/crud-operation-with-dotnetcore-dapper.php
+            //https://www.c-sharpcorner.com/article/crud-operations-in-asp-net-core-2-razor-page-with-dapper-and-repository-pattern/
+            //configuration.GetValue(“DBInfo:ConnectionString”)
+            services.Configure<ReadConfig>(Configuration.GetSection("ConnectionStrings").GetSection("DefaultConnection"));
 
             // google : mssql 2008 skip take exception site:stackoverflow.com
             // https://stackoverflow.com/questions/29995502/paging-with-entity-framework-7-and-sql-server-2008
