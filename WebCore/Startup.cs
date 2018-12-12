@@ -21,6 +21,7 @@ using ApplicationCore.Entity;
 using Infrastructure.CustomDataContext;
 using Infrastructure.Repository;
 using System.IO;
+using Infrastructure.Logging;
 
 namespace WebCore
 {
@@ -100,6 +101,8 @@ namespace WebCore
             //var config = builder.Build();
 
             //services.AddTransient<IDapperHelper>(f => new DapperHelper(config["ConnectionStrings:DefaultConnection"]));
+            services.AddScoped(typeof(IAppLogger<>), typeof(LoggerAdapter<>));
+
             services.AddSingleton<IConfiguration>(Configuration);
             services.AddTransient<IDapperHelper, DapperHelper>();
         }

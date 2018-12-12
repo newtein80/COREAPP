@@ -18,11 +18,13 @@ namespace WebCore.Areas.VulnManage.Controllers
     {
         private readonly ISystemCodeRepository _systemCodeRepository;
         private readonly IDapperHelper _dapperHelper;
+        private readonly IAppLogger<VulnManageController> _logger;
 
-        public VulnManageController(ISystemCodeRepository systemCodeRepository, IDapperHelper dapperHelper)
+        public VulnManageController(ISystemCodeRepository systemCodeRepository, IDapperHelper dapperHelper, IAppLogger<VulnManageController> logger)
         {
             this._systemCodeRepository = systemCodeRepository;
             this._dapperHelper = dapperHelper;
+            this._logger = logger;
         }
 
         [HttpGet]
