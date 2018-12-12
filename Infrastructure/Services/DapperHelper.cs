@@ -1,6 +1,7 @@
 ﻿using ApplicationCore.Entity;
 using Dapper;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -12,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Services
 {
-    public static class DapperHelper
+    public class DapperHelper : IDapperHelper
     {
         #region+ Reference
         //https://www.learnmvc.in/crud-operation-with-dotnetcore-dapper.php
@@ -34,7 +35,15 @@ namespace Infrastructure.Services
         //google : dapper helper connection string, dapper connection string site:stackoverflow.com, asp.net core dapperhelper connection string, asp net core connection string manage
         #endregion
 
-        private static string connectionString = "Data Source=127.0.0.1;Initial Catalog=COREAPP;User ID=sa;Password=#skdlf12;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+        private readonly string connectionString;
+        IOptions<ReadConfig> configConnectionString;// = "Data Source=127.0.0.1;Initial Catalog=COREAPP;User ID=sa;Password=#skdlf12;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+
+        public DapperHelper(IOptions<ReadConfig> configConnectionString)
+        {
+            this.configConnectionString = configConnectionString;
+            connectionString = configConnectionString.Value.ConfigConnectionString;
+        }
+
         //private static string connectionString = "Data Source=PARKJS\\SQLEXPRESS;Initial Catalog=COREAPP;User ID=sa;Password=#skdlf12;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
 
         #region+ http://www.nullskull.com/a/10399923/sqlmapperhelper--a-helper-class-for-dapperdotnet.aspx
@@ -43,7 +52,7 @@ namespace Infrastructure.Services
         /// </summary>
         /// <param name="name">The name of the connection string (optional).</param>
         /// <returns></returns>
-        public static SqlConnection GetOpenConnection(string name = null)
+        public  SqlConnection GetOpenConnection(string name = null)
         {
             string connString = "";
 
@@ -57,7 +66,7 @@ namespace Infrastructure.Services
             return connection;
         }
 
-        public static int InsertMultiple<T>(string sql, IEnumerable<T> entities, string connectionName = null) where T : class, new()
+        public  int InsertMultiple<T>(string sql, IEnumerable<T> entities, string connectionName = null) where T : class, new()
         {
             using (SqlConnection cnn = GetOpenConnection(connectionName))
             {
@@ -71,7 +80,7 @@ namespace Infrastructure.Services
             }
         }
 
-        public static DataTable ToDataTable<T>(this IList<T> list)
+        public  DataTable ToDataTable<T>(IList<T> list)// this IList<T> list
         {
             PropertyDescriptorCollection props = TypeDescriptor.GetProperties(typeof(T));
             DataTable table = new DataTable();
@@ -90,7 +99,7 @@ namespace Infrastructure.Services
             return table;
         }
 
-        public static DynamicParameters GetParametersFromObject(object obj, string[] propertyNamesToIgnore)
+        public  DynamicParameters GetParametersFromObject(object obj, string[] propertyNamesToIgnore)
         {
             if (propertyNamesToIgnore == null) propertyNamesToIgnore = new string[] { String.Empty };
             DynamicParameters p = new DynamicParameters();
@@ -104,14 +113,14 @@ namespace Infrastructure.Services
             return p;
         }
 
-        public static void SetIdentity<T>(IDbConnection connection, Action<T> setId)
+        public  void SetIdentity<T>(IDbConnection connection, Action<T> setId)
         {
             dynamic identity = connection.Query("SELECT @@IDENTITY AS Id").Single();
             T newId = (T)identity.Id;
             setId(newId);
         }
 
-        public static object GetPropertyValue(object target, string propertyName)
+        public  object GetPropertyValue(object target, string propertyName)
         {
             PropertyInfo[] properties = target.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance);
 
@@ -126,7 +135,7 @@ namespace Infrastructure.Services
             return theValue;
         }
 
-        public static void SetPropertyValue(object p, string propName, object value)
+        public  void SetPropertyValue(object p, string propName, object value)
         {
             Type t = p.GetType();
             PropertyInfo info = t.GetProperty(propName);
@@ -144,7 +153,7 @@ namespace Infrastructure.Services
         /// <param name="procname">The procname.</param>
         /// <param name="parms">The parms.</param>
         /// <returns></returns>
-        public static List<T> StoredProcWithParams<T>(string procname, dynamic parms, string connectionName = null)
+        public  List<T> StoredProcWithParams<T>(string procname, dynamic parms, string connectionName = null)
         {
             using (SqlConnection connection = GetOpenConnection(connectionName))
             {
@@ -160,7 +169,7 @@ namespace Infrastructure.Services
         /// <param name="parms">The parms.</param>
         /// <param name="connectionName">Name of the connection.</param>
         /// <returns></returns>
-        public static List<dynamic> StoredProcWithParamsDynamic(string procname, dynamic parms, string connectionName = null)
+        public  List<dynamic> StoredProcWithParamsDynamic(string procname, dynamic parms, string connectionName = null)
         {
             using (SqlConnection connection = GetOpenConnection(connectionName))
             {
@@ -176,9 +185,9 @@ namespace Infrastructure.Services
         /// <param name="procName">Name of the proc.</param>
         /// <param name="parms">instance of DynamicParameters class. This should include a defined output parameter</param>
         /// <returns>U - the @@Identity value from output parameter</returns>
-        public static U StoredProcInsertWithID<T, U>(string procName, DynamicParameters parms, string connectionName = null)
+        public  U StoredProcInsertWithID<T, U>(string procName, DynamicParameters parms, string connectionName = null)
         {
-            using (SqlConnection connection = DapperHelper.GetOpenConnection(connectionName))
+            using (SqlConnection connection = GetOpenConnection(connectionName))
             {
                 var x = connection.Execute(procName, (object)parms, commandType: CommandType.StoredProcedure);
                 return parms.Get<U>("@ID");
@@ -192,7 +201,7 @@ namespace Infrastructure.Services
         /// <param name="sql">The SQL.</param>
         /// <param name="parms">The parms.</param>
         /// <returns></returns>
-        public static List<T> SqlWithParams<T>(string sql, dynamic parms, string connectionnName = null)
+        public  List<T> SqlWithParams<T>(string sql, dynamic parms, string connectionnName = null)
         {
             using (SqlConnection connection = GetOpenConnection(connectionnName))
             {
@@ -206,7 +215,7 @@ namespace Infrastructure.Services
         /// <param name="sql">The SQL.</param>
         /// <param name="parms">The parms.</param>
         /// <returns></returns>
-        public static int InsertUpdateOrDeleteSql(string sql, dynamic parms, string connectionName = null)
+        public  int InsertUpdateOrDeleteSql(string sql, dynamic parms, string connectionName = null)
         {
             using (SqlConnection connection = GetOpenConnection(connectionName))
             {
@@ -220,7 +229,7 @@ namespace Infrastructure.Services
         /// <param name="procName">Name of the proc.</param>
         /// <param name="parms">The parms.</param>
         /// <returns></returns>
-        public static int InsertUpdateOrDeleteStoredProc(string procName, dynamic parms, string connectionName = null)
+        public  int InsertUpdateOrDeleteStoredProc(string procName, dynamic parms, string connectionName = null)
         {
             using (SqlConnection connection = GetOpenConnection(connectionName))
             {
@@ -236,7 +245,7 @@ namespace Infrastructure.Services
         /// <param name="parms">The parms.</param>
         /// <param name="connectionName">Name of the connection.</param>
         /// <returns></returns>
-        public static T SqlWithParamsSingle<T>(string sql, dynamic parms, string connectionName = null)
+        public  T SqlWithParamsSingle<T>(string sql, dynamic parms, string connectionName = null)
         {
             using (SqlConnection connection = GetOpenConnection(connectionName))
             {
@@ -252,7 +261,7 @@ namespace Infrastructure.Services
         /// <param name="parms">The parms.</param>
         /// <param name="connectionName">Name of the connection.</param>
         /// <returns></returns>
-        public static System.Dynamic.DynamicObject DynamicProcWithParamsSingle<T>(string sql, dynamic parms, string connectionName = null)
+        public  System.Dynamic.DynamicObject DynamicProcWithParamsSingle<T>(string sql, dynamic parms, string connectionName = null)
         {
             using (SqlConnection connection = GetOpenConnection(connectionName))
             {
@@ -268,7 +277,7 @@ namespace Infrastructure.Services
         /// <param name="parms">The parms.</param>
         /// <param name="connectionName">Name of the connection.</param>
         /// <returns></returns>
-        public static IEnumerable<dynamic> DynamicProcWithParams<T>(string sql, dynamic parms, string connectionName = null)
+        public  IEnumerable<dynamic> DynamicProcWithParams<T>(string sql, dynamic parms, string connectionName = null)
         {
             using (SqlConnection connection = GetOpenConnection(connectionName))
             {
@@ -284,7 +293,7 @@ namespace Infrastructure.Services
         /// <param name="parms">The parms.</param>
         /// <param name="connectionName">Name of the connection.</param>
         /// <returns></returns>
-        public static T StoredProcWithParamsSingle<T>(string procname, dynamic parms, string connectionName = null)
+        public  T StoredProcWithParamsSingle<T>(string procname, dynamic parms, string connectionName = null)
         {
             using (SqlConnection connection = GetOpenConnection(connectionName))
             {
@@ -295,7 +304,7 @@ namespace Infrastructure.Services
 
         #region+ https://m.blog.naver.com/PostView.nhn?blogId=wolfre&logNo=220597602977&proxyReferer=https%3A%2F%2Fwww.google.co.kr%2F
         // Select List
-        public static IEnumerable<T> GetList<T>(string storedProcedure, DynamicParameters param = null, string connectionName = null) where T : class
+        public  IEnumerable<T> GetList<T>(string storedProcedure, DynamicParameters param = null, string connectionName = null) where T : class
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
@@ -307,7 +316,7 @@ namespace Infrastructure.Services
         }
 
         // Multiple Select 1: N...
-        public static Dictionary<Tmain, List<Tsub>> MultiPleGetList<Tmain, Tsub>(string storedProcedure, DynamicParameters param = null, string connectionName = null) where Tmain : class
+        public  Dictionary<Tmain, List<Tsub>> MultiPleGetList<Tmain, Tsub>(string storedProcedure, DynamicParameters param = null, string connectionName = null) where Tmain : class
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
@@ -331,7 +340,7 @@ namespace Infrastructure.Services
         }
 
         // Top 1
-        public static T Top1<T>(string storedProcedure, DynamicParameters param = null, string connectionName = null) where T : class
+        public  T Top1<T>(string storedProcedure, DynamicParameters param = null, string connectionName = null) where T : class
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
@@ -343,7 +352,7 @@ namespace Infrastructure.Services
         }
 
         // Insert, Update, Delete
-        public static void Process<T>(string storedProcedure, DynamicParameters param = null, string connectionName = null) where T : class
+        public  void Process<T>(string storedProcedure, DynamicParameters param = null, string connectionName = null) where T : class
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
             {

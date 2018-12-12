@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ApplicationCore.Entity;
 using ApplicationCore.Interface;
 using Infrastructure.Identity;
 using Infrastructure.Services;
@@ -72,7 +74,19 @@ namespace WebCoreCreateAccount
 
             _services = services;
 
+            //https://dotnetcorecentral.com/blog/asp-net-core-web-api-application-with-dapper-part-2/
+            //var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json");
+            //var config = builder.Build();
+            //services.AddTransient<IDapperHelper>(f => new DapperHelper(config["ConnectionStrings:DefaultConnection"]));
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            /*
+             * InvalidOperationException: Unable to resolve service for type 'Infrastructure.Services.IDapperHelper' while attempting to activate 'WebCore.Areas.VulnManage.Controllers.VulnManageController'.
+             * */
+            services.Configure<ReadConfig>(Configuration.GetSection("ConnectionStrings"));
+
+            services.AddSingleton<IDapperHelper, DapperHelper>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

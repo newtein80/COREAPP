@@ -61,12 +61,12 @@ namespace WebCore.Areas.VulnManage.Controllers
             param.Add("@allCount", dbType: DbType.Int32, direction: ParameterDirection.Output, size: 50);
 
             // 테이블 한개 리스트
-            var initVulnModels = DapperHelper.GetList<T_VULN>("SP_VULN_LIST_TEST", param).ToList();
+            var initVulnModels = new List<T_VULN> { new T_VULN() }; //DapperHelper.GetList<T_VULN>("SP_VULN_LIST_TEST", param).ToList();
 
             // 메인 + 서브 모델
             //var Table = SqlHelper.MultiPleGetList<Schema_User, Address>(SqlHelper.localDB.ToString(), "sp_GetUser_List", param);
 
-            int resultParam = param.Get<int>("@allCount");
+            int resultParam = 0;// param.Get<int>("@allCount");
 
             VulnManagePageModel vulnViewModel = new VulnManagePageModel
             {
