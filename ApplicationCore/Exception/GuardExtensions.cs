@@ -10,8 +10,8 @@ namespace ApplicationCore.Exception
     {
         public static void NullBasket(this IGuardClause guardClause, int vulnSeq, T_VULN vuln)
         {
-            if (vuln == null)
-                throw new BasketNotFoundException(vulnSeq);
+            //if (vuln == null)
+            //    throw new BasketNotFoundException(vulnSeq);
         }
     }
 }
