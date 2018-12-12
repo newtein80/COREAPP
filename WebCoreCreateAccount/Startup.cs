@@ -74,11 +74,6 @@ namespace WebCoreCreateAccount
 
             _services = services;
 
-            //https://dotnetcorecentral.com/blog/asp-net-core-web-api-application-with-dapper-part-2/
-            //var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json");
-            //var config = builder.Build();
-            //services.AddTransient<IDapperHelper>(f => new DapperHelper(config["ConnectionStrings:DefaultConnection"]));
-
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             /*
@@ -86,7 +81,7 @@ namespace WebCoreCreateAccount
              * */
             services.Configure<ReadConfig>(Configuration.GetSection("ConnectionStrings"));
 
-            services.AddSingleton<IDapperHelper, DapperHelper>();
+            //services.AddSingleton<IDapperHelper, DapperHelper>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

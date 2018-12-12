@@ -20,6 +20,7 @@ using Infrastructure.SystemDataContext;
 using ApplicationCore.Entity;
 using Infrastructure.CustomDataContext;
 using Infrastructure.Repository;
+using System.IO;
 
 namespace WebCore
 {
@@ -44,10 +45,6 @@ namespace WebCore
             services.AddDbContext<CustomDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection"), opt => { opt.UseRowNumberForPaging(); }));
-            //https://www.learnmvc.in/crud-operation-with-dotnetcore-dapper.php
-            //https://www.c-sharpcorner.com/article/crud-operations-in-asp-net-core-2-razor-page-with-dapper-and-repository-pattern/
-            //configuration.GetValue(“DBInfo:ConnectionString”)
-            services.Configure<ReadConfig>(Configuration.GetSection("ConnectionStrings").GetSection("DefaultConnection"));
 
             // google : mssql 2008 skip take exception site:stackoverflow.com
             // https://stackoverflow.com/questions/29995502/paging-with-entity-framework-7-and-sql-server-2008
@@ -94,6 +91,17 @@ namespace WebCore
             _services = services;
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            //https://www.learnmvc.in/crud-operation-with-dotnetcore-dapper.php
+            //https://www.c-sharpcorner.com/article/crud-operations-in-asp-net-core-2-razor-page-with-dapper-and-repository-pattern/
+            //configuration.GetValue(“DBInfo:ConnectionString”)
+            //services.Configure<ReadConfig>(Configuration.GetSection("ConnectionStrings").GetSection("DefaultConnection"));
+            //var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json");
+            //var config = builder.Build();
+
+            //services.AddTransient<IDapperHelper>(f => new DapperHelper(config["ConnectionStrings:DefaultConnection"]));
+            services.AddSingleton<IConfiguration>(Configuration);
+            services.AddTransient<IDapperHelper, DapperHelper>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

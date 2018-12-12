@@ -35,16 +35,24 @@ namespace Infrastructure.Services
         //google : dapper helper connection string, dapper connection string site:stackoverflow.com, asp.net core dapperhelper connection string, asp net core connection string manage
         #endregion
 
-        private readonly string connectionString;
-        IOptions<ReadConfig> configConnectionString;// = "Data Source=127.0.0.1;Initial Catalog=COREAPP;User ID=sa;Password=#skdlf12;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+        //private readonly string connectionString = "Data Source=PARKJS\\SQLEXPRESS;Initial Catalog=COREAPP;User ID=sa;Password=#skdlf12;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
 
-        public DapperHelper(IOptions<ReadConfig> configConnectionString)
+        //public DapperHelper(string connectionString)
+        //{
+        //    this.connectionString = connectionString;
+        //}
+        IConfiguration configuration;
+
+        public DapperHelper(IConfiguration configuration)
         {
-            this.configConnectionString = configConnectionString;
-            connectionString = configConnectionString.Value.ConfigConnectionString;
+            this.configuration = configuration;
         }
 
-        //private static string connectionString = "Data Source=PARKJS\\SQLEXPRESS;Initial Catalog=COREAPP;User ID=sa;Password=#skdlf12;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+        public string GetConnectionString()
+        {
+            var connection = configuration.GetSection("ConnectionStrings").GetSection("DefaultConnection").Value;
+            return connection;
+        }
 
         #region+ http://www.nullskull.com/a/10399923/sqlmapperhelper--a-helper-class-for-dapperdotnet.aspx
         /// <summary>
@@ -61,7 +69,7 @@ namespace Infrastructure.Services
 
             //connString = name == null ? connString = ConfigurationManager.ConnectionStrings[0].ConnectionString : connString = ConfigurationManager.ConnectionStrings[name].ConnectionString;
             //connString = name == null ? connString = Configuration.GetConnectionString("DefaultConnection") : connString = Configuration.GetConnectionString("DefaultConnection");
-            var connection = new SqlConnection(connString);
+            var connection = new SqlConnection(GetConnectionString()); //new SqlConnection(connString);
             connection.Open();
             return connection;
         }
@@ -306,7 +314,7 @@ namespace Infrastructure.Services
         // Select List
         public  IEnumerable<T> GetList<T>(string storedProcedure, DynamicParameters param = null, string connectionName = null) where T : class
         {
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (SqlConnection connection = new SqlConnection(GetConnectionString()))
             {
                 connection.Open();
                 var output = connection.Query<T>(storedProcedure, param, commandType: CommandType.StoredProcedure);
@@ -318,7 +326,7 @@ namespace Infrastructure.Services
         // Multiple Select 1: N...
         public  Dictionary<Tmain, List<Tsub>> MultiPleGetList<Tmain, Tsub>(string storedProcedure, DynamicParameters param = null, string connectionName = null) where Tmain : class
         {
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (SqlConnection connection = new SqlConnection(GetConnectionString()))
             {
                 connection.Open();
 
@@ -342,7 +350,7 @@ namespace Infrastructure.Services
         // Top 1
         public  T Top1<T>(string storedProcedure, DynamicParameters param = null, string connectionName = null) where T : class
         {
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (SqlConnection connection = new SqlConnection(GetConnectionString()))
             {
                 connection.Open();
                 var output = connection.Query<T>(storedProcedure, param, commandType: CommandType.StoredProcedure).FirstOrDefault();
@@ -354,7 +362,7 @@ namespace Infrastructure.Services
         // Insert, Update, Delete
         public  void Process<T>(string storedProcedure, DynamicParameters param = null, string connectionName = null) where T : class
         {
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (SqlConnection connection = new SqlConnection(GetConnectionString()))
             {
                 connection.Open();
                 connection.Execute(storedProcedure, param, commandType: CommandType.StoredProcedure);

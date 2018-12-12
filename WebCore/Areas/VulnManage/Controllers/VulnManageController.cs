@@ -16,17 +16,19 @@ namespace WebCore.Areas.VulnManage.Controllers
     [Area("VulnManage")]
     public class VulnManageController : Controller
     {
-        private readonly ISystemCodeRepository systemCodeRepository;
+        private readonly ISystemCodeRepository _systemCodeRepository;
+        private readonly IDapperHelper _dapperHelper;
 
-        public VulnManageController(ISystemCodeRepository systemCodeRepository)
+        public VulnManageController(ISystemCodeRepository systemCodeRepository, IDapperHelper dapperHelper)
         {
-            this.systemCodeRepository = systemCodeRepository;
+            this._systemCodeRepository = systemCodeRepository;
+            this._dapperHelper = dapperHelper;
         }
 
         [HttpGet]
         public IActionResult VulnList()
         {
-            var _ddlDiagType = systemCodeRepository.GetCommonCodeDropDownList("DIAG_TYPE", true);
+            var _ddlDiagType = _systemCodeRepository.GetCommonCodeDropDownList("DIAG_TYPE", true);
 
             var vulnSearchModel = new VulnManageSearchModel();
 
@@ -61,7 +63,8 @@ namespace WebCore.Areas.VulnManage.Controllers
             param.Add("@allCount", dbType: DbType.Int32, direction: ParameterDirection.Output, size: 50);
 
             // 테이블 한개 리스트
-            var initVulnModels = new List<T_VULN> { new T_VULN() }; //DapperHelper.GetList<T_VULN>("SP_VULN_LIST_TEST", param).ToList();
+            //var initVulnModels = new List<T_VULN> { new T_VULN() }; //DapperHelper.GetList<T_VULN>("SP_VULN_LIST_TEST", param).ToList();
+            var initVulnModels = _dapperHelper.GetList<T_VULN>("SP_VULN_LIST_TEST", param).ToList();
 
             // 메인 + 서브 모델
             //var Table = SqlHelper.MultiPleGetList<Schema_User, Address>(SqlHelper.localDB.ToString(), "sp_GetUser_List", param);
