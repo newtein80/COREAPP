@@ -18,6 +18,8 @@ using ApplicationCore.Interface;
 using Infrastructure.Services;
 using Infrastructure.SystemDataContext;
 using ApplicationCore.Entity;
+using Infrastructure.CustomDataContext;
+using Infrastructure.Repository;
 
 namespace WebCore
 {
@@ -39,6 +41,9 @@ namespace WebCore
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
 
+            services.AddDbContext<CustomDbContext>(options =>
+                options.UseSqlServer(
+                    Configuration.GetConnectionString("DefaultConnection"), opt => { opt.UseRowNumberForPaging(); }));
             //https://www.learnmvc.in/crud-operation-with-dotnetcore-dapper.php
             //https://www.c-sharpcorner.com/article/crud-operations-in-asp-net-core-2-razor-page-with-dapper-and-repository-pattern/
             //configuration.GetValue(“DBInfo:ConnectionString”)
@@ -83,6 +88,8 @@ namespace WebCore
                     Configuration["EmailSender:Password"]
                 )
             );
+
+            services.AddTransient<ISystemCodeRepository, SystemCodeRepository>();
 
             _services = services;
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace ApplicationCore.Entity.VulnModel
 {
@@ -10,6 +11,7 @@ namespace ApplicationCore.Entity.VulnModel
             T_VULN = new HashSet<T_VULN>();
         }
 
+        [Key]
         public long GROUP_SEQ { get; set; }
         public long UPPER_SEQ { get; set; }
         public int LEVEL { get; set; }

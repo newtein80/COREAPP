@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace ApplicationCore.Entity.VulnModel
 {
     public partial class T_VULN
     {
+        [Key]
         public long VULN_SEQ { get; set; }
         public long GROUP_SEQ { get; set; }
         public bool? MANUAL_YN { get; set; }

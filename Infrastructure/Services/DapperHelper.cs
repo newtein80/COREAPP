@@ -1,4 +1,5 @@
-﻿using Dapper;
+﻿using ApplicationCore.Entity;
+using Dapper;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
@@ -13,6 +14,7 @@ namespace Infrastructure.Services
 {
     public static class DapperHelper
     {
+        #region+ Reference
         //https://www.learnmvc.in/crud-operation-with-dotnetcore-dapper.php
         //https://techbrij.com/asp-net-core-postgresql-dapper-crud
         //https://dotnetcorecentral.com/blog/asp-net-core-web-api-application-with-dapper-part-1/
@@ -30,9 +32,10 @@ namespace Infrastructure.Services
         //https://stackoverflow.com/questions/35015066/passing-applications-connection-string-down-to-a-repository-class-library-in-as
         //https://stackoverflow.com/questions/9218847/how-do-i-handle-database-connections-with-dapper-in-net
         //google : dapper helper connection string, dapper connection string site:stackoverflow.com, asp.net core dapperhelper connection string, asp net core connection string manage
+        #endregion
 
-        //private static string connectionString = "Data Source=127.0.0.1;Initial Catalog=PJSWORK;User ID=sa;Password=#skdlf12;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
-        private static string connectionString = "Data Source=PARKJS\\SQLEXPRESS;Initial Catalog=PJSWORK;User ID=sa;Password=#skdlf12;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+        private static string connectionString = "Data Source=127.0.0.1;Initial Catalog=COREAPP;User ID=sa;Password=#skdlf12;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+        //private static string connectionString = "Data Source=PARKJS\\SQLEXPRESS;Initial Catalog=COREAPP;User ID=sa;Password=#skdlf12;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
 
         #region+ http://www.nullskull.com/a/10399923/sqlmapperhelper--a-helper-class-for-dapperdotnet.aspx
         /// <summary>
@@ -53,7 +56,6 @@ namespace Infrastructure.Services
             connection.Open();
             return connection;
         }
-
 
         public static int InsertMultiple<T>(string sql, IEnumerable<T> entities, string connectionName = null) where T : class, new()
         {
@@ -109,7 +111,6 @@ namespace Infrastructure.Services
             setId(newId);
         }
 
-
         public static object GetPropertyValue(object target, string propertyName)
         {
             PropertyInfo[] properties = target.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance);
@@ -152,7 +153,6 @@ namespace Infrastructure.Services
 
         }
 
-
         /// <summary>
         /// Stored proc with params returning dynamic.
         /// </summary>
@@ -184,7 +184,6 @@ namespace Infrastructure.Services
                 return parms.Get<U>("@ID");
             }
         }
-
 
         /// <summary>
         /// SQL with params.
@@ -276,7 +275,6 @@ namespace Infrastructure.Services
                 return connection.Query(sql, (object)parms, commandType: CommandType.StoredProcedure);
             }
         }
-
 
         /// <summary>
         /// Stored proc with params returning single.

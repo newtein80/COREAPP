@@ -1,0 +1,154 @@
+﻿USE COREAPP
+GO
+
+INSERT INTO [dbo].[T_COMP_INFO]
+           ([COMP_NAME]
+           ,[COMP_DESCRIPTION]
+           ,[COMP_REF]
+           ,[STANDARD_YEAR]
+           ,[DIAG_TYPE]
+           ,[CONFIRM_YN]
+           ,[USE_YN]
+           ,[CREATE_USER_ID]
+           ,[CREATE_DT]
+           ,[UPDATE_USER_ID]
+           ,[UPDATE_DT]
+           ,[COMP_DETAIL_GUBUN])
+     VALUES
+           ('TEST'
+           ,'TEST Compliance'
+           ,'Compliance Description'
+           ,'2018'
+           ,'SCRIPT'
+           ,1
+           ,0
+           ,'johndoe@email'
+           ,GETDATE()
+           ,'johndoe@email'
+           ,GETDATE()
+           ,'')
+GO
+
+SELECT * FROM [dbo].[T_COMP_INFO]
+
+
+INSERT INTO [COREAPP].[dbo].[T_VULN_GROUP]
+           ([GROUP_SEQ]
+           ,[UPPER_SEQ]
+           ,[LEVEL]
+           ,[GROUP_TYPE]
+           ,[COMP_SEQ]
+           ,[DIAG_KIND]
+           ,[DIAG_TERM]
+           ,[GROUP_ID]
+           ,[GROUP_NAME]
+           ,[DIAG_TOOL]
+           ,[SORT_ORDER]
+           ,[CREATE_USER_ID]
+           ,[CREATE_DT]
+           ,[UPDATE_USER_ID]
+           ,[UPDATE_DT])
+     VALUES
+           (101
+           ,0
+           ,2
+           ,'G'
+           ,4
+           ,'DBO'
+           ,'R'
+           ,'DBO'
+           ,'ORACLE GROUP'
+           ,''
+           ,1
+           ,'johndoe@email'
+           ,GETDATE()
+           ,'johndoe@email'
+           ,GETDATE())
+GO
+
+
+SELECT * FROM [dbo].[T_VULN_GROUP]
+
+
+INSERT INTO [COREAPP].[dbo].[T_VULN]
+           ([GROUP_SEQ]
+           ,[MANUAL_YN]
+           ,[AUTO_YN]
+           ,[MANAGE_ID]
+           ,[CLIENT_STANDARD_ID]
+           ,[VULN_NAME]
+           ,[SORT_ORDER]
+           ,[RULE_YN]
+           ,[RATE]
+           ,[SCORE]
+           ,[APPLY_TIME]
+           ,[DETAIL]
+           ,[DETAIL_PATH]
+           ,[JUDGEMENT]
+           ,[EFFECT]
+           ,[REMEDY]
+           ,[REMEDY_PATH]
+           ,[REFRRENCE]
+           ,[PARSER_CONTENTS]
+           ,[ORG_PARSER_CONTENTS]
+           ,[APPLY_TARGET]
+           ,[USE_YN]
+           ,[EXCEPT_CD]
+           ,[EXCEPT_TERM_TYPE]
+           ,[EXCEPT_TERM_FR]
+           ,[EXCEPT_TERM_TO]
+           ,[EXCEPT_REASON]
+           ,[EXCEPT_USER_ID]
+           ,[EXCEPT_DT]
+           ,[CREATE_USER_ID]
+           ,[CREATE_DT]
+           ,[UPDATE_USER_ID]
+           ,[UPDATE_DT]
+           ,[VULGROUP]
+           ,[VULNO]
+           ,[REMEDY_DETAIL]
+           ,[OVERVIEW]
+           ,[MANAGEMENT_VULN_YN])
+     VALUES
+           (101
+           ,1
+           ,0
+           ,'ITEM-01'
+           ,'CITEM-01'
+           ,'VULUME NO 01'
+           ,1
+           ,0
+           ,3
+           ,9
+           ,'DE'
+           ,'VULN DETAIL....'
+           ,''
+           ,'JUDGEMENT....'
+           ,'EFFECT..'
+           ,'REMEDY.....'
+           ,''
+           ,''
+           ,'PARSER_CONTENTS.....'
+           ,'ORG_PARSER_CONTENTS.....'
+           ,'APPLY_TARGET.......'
+           ,1
+           ,'NA'
+           ,'LO'
+           ,GETDATE()
+           ,GETDATE()
+           ,'EXCEPT_REASON.....'
+           ,'johndoe@email'
+           ,GETDATE()
+           ,'johndoe@email'
+           ,GETDATE()
+           ,'johndoe@email'
+           ,GETDATE()
+           ,10
+           ,'5050'
+           ,'REMEDY_DETAIL....'
+           ,'OVERVIEW......'
+           ,1)
+GO
+
+
+SELECT * FROM [dbo].[T_VULN]
