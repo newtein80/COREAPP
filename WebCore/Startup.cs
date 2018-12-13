@@ -22,6 +22,7 @@ using Infrastructure.CustomDataContext;
 using Infrastructure.Repository;
 using System.IO;
 using Infrastructure.Logging;
+using ApplicationCore.RepositoryInterface;
 
 namespace WebCore
 {
@@ -105,6 +106,8 @@ namespace WebCore
 
             services.AddSingleton<IConfiguration>(Configuration);
             services.AddTransient<IDapperHelper, DapperHelper>();
+
+            services.AddTransient<MenuMasterRepository, MenuMasterRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
