@@ -28,3 +28,19 @@ CREATE TABLE [dbo].[T_COMMON_CODE](
 GO
 
 
+USE master
+GO
+
+INSERT INTO COREAPP.DBO.T_COMMON_CODE
+SELECT
+	CodeType
+	, CodeTypeName
+	, CodeId
+	, CodeName
+	, CodeVal
+	, SortOrder
+	, CASE WHEN UseYn = 'Y' THEN 1 ELSE 0 END AS USEYN
+	, CodeComment
+	, CreateUserId
+	, CreateDt
+FROM PJSWORK.DBO.TCommonCode
