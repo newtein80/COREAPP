@@ -13,7 +13,7 @@
 <h2>VulnList</h2>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-controller="VulnManage" asp-action="VulnCreate">Create New</a>
 </p>
 <table class="table">
     <thead>
@@ -39,7 +39,7 @@
                 </td>
                 <td>
                     <a asp-action="Edit" asp-route-id="@item.VULN_SEQ">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.VULN_SEQ">Details</a> |
+                    <a asp-controller="VulnManage" asp-action="VulnDetail" asp-route-id="@item.VULN_SEQ">Details</a> |
                     <a asp-action="Delete" asp-route-id="@item.VULN_SEQ">Delete</a>
                 </td>
             </tr>

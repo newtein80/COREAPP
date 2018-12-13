@@ -1637,3 +1637,140 @@ end
 
 
 GO
+
+
+USE [COREAPP]
+GO
+
+/****** Object:  StoredProcedure [dbo].[SP_VULN_INFO_VIW]    Script Date: 2018-12-14 오전 12:15:24 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+ALTER procedure [dbo].[SP_VULN_INFO_VIW]
+    @vuln_seq bigint
+    ,   @comp_seq bigint
+    ,   @diag_kind nvarchar(32)
+    ,   @group_seq bigint
+as
+
+set transaction isolation level read uncommitted
+set nocount on
+
+begin
+    declare
+		@_comp_seq      bigint = 0
+		, @_group_seq   bigint = 0
+		, @_vuln_seq    bigint = 0
+
+    if 1 > @vuln_seq begin
+		set @vuln_seq = null
+    end
+
+    if 1 > @comp_seq begin
+		set @comp_seq = null
+    end
+    
+    if @diag_kind is null or @diag_kind = '' or @diag_kind = '0' begin
+		set @diag_kind = null
+    end
+
+    if 1 > @group_seq begin
+		set @group_seq = null
+    end
+    
+	select
+		t12.DIAG_TYPE  
+		, t12.DIAG_KIND  
+		, t12.COMP_SEQ
+		, t12.COMP_NAME
+		, t12.GROUP_SEQ
+		, t12.GROUP_NAME
+		, t33.APPLY_TARGET
+		, t33.APPLY_TIME
+		, t33.AUTO_YN
+		, t33.CLIENT_STANDARD_ID
+		, t33.CREATE_DT
+		, t33.CREATE_USER_ID
+		, t33.DETAIL
+		, t33.DETAIL_PATH
+		, t33.EFFECT
+		, t33.EXCEPT_CD
+		, t33.EXCEPT_DT
+		, t33.EXCEPT_REASON
+		, t33.EXCEPT_TERM_FR
+		, t33.EXCEPT_TERM_TO
+		, t33.EXCEPT_TERM_TYPE
+		, t33.EXCEPT_USER_ID
+		, t33.JUDGEMENT
+		, t33.MANAGE_ID
+		, t33.MANAGEMENT_VULN_YN
+		, t33.MANUAL_YN
+		, t33.ORG_PARSER_CONTENTS
+		, t33.OVERVIEW
+		, t33.PARSER_CONTENTS
+		, t33.RATE
+		, t33.REFRRENCE
+		, t33.REMEDY
+		, t33.REMEDY_DETAIL
+		, t33.REMEDY_PATH
+		, t33.RULE_YN
+		, t33.SCORE
+		, t33.SORT_ORDER
+		, t33.UPDATE_DT
+		, t33.UPDATE_USER_ID
+		, t33.USE_YN
+		, t33.VULGROUP
+		, t33.VULN_NAME
+		, t33.VULN_SEQ
+		, t33.VULNO
+	from dbo.T_VULN as t33
+	left outer join
+	(
+		select
+			t11.COMP_SEQ
+			, t11.COMP_NAME
+			, t11.DIAG_TYPE
+			--, (select CodeName from dbo.TCommonCode where CodeType = 'DIAG_TYPE' and CodeId = t11.DIAG_TYPE)
+			, t22.DIAG_KIND
+			, t22.GROUP_SEQ
+			, t22.GROUP_NAME
+		from
+		(
+			select
+				t1.COMP_SEQ
+				, t1.COMP_NAME
+				, t1.DIAG_TYPE
+			from dbo.T_COMP_INFO as t1 with(nolock)
+			where 1=1
+			and case when @comp_seq is null then '1' else t1.COMP_SEQ end = case when @comp_seq is null then '1' else @comp_seq end
+		) as t11
+		left outer join
+		(
+			select
+				t2.COMP_SEQ
+				, t2.DIAG_KIND
+				, t2.GROUP_NAME
+				, t2.GROUP_SEQ
+			from dbo.T_VULN_GROUP as t2 with(nolock)
+			where 1=1
+			and GROUP_TYPE = 'G'
+			and case when @group_seq is null then '1' else t2.GROUP_SEQ end = case when @group_seq is null then '1' else @group_seq end
+			and case when @diag_kind is null then '1' else t2.DIAG_KIND end = case when @diag_kind is null then '1' else @diag_kind end
+		) as t22
+		on
+		(
+			t11.COMP_SEQ = t22.COMP_SEQ
+		)
+	) as t12
+	on
+	(
+		t12.GROUP_SEQ = t33.GROUP_SEQ
+	)
+	where case when @vuln_seq is null then '1' else t33.VULN_SEQ end =  case when @vuln_seq is null then '1' else @vuln_seq end
+    
+end
+GO

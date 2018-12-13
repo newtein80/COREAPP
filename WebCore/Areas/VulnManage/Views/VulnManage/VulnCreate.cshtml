@@ -1,0 +1,221 @@
+﻿@model ApplicationCore.Entity.VulnModel.T_VULN
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@addTagHelper *, jQWidgets.AspNetCore.Mvc.TagHelpers
+@addTagHelper *, jQWidgets.AspNetCore.Mvc.Bootstrap.TagHelpers
+
+@{
+    ViewData["Title"] = "VulnCreate";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>VulnCreate</h2>
+
+<h4>T_VULN</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="VulnCreate">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="GROUP_SEQ" class="control-label"></label>
+                <select asp-for="GROUP_SEQ" class="form-control" asp-items="ViewBag.GROUP_SEQ"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="MANUAL_YN" class="control-label"></label>
+                <input asp-for="MANUAL_YN" class="form-control" />
+                <span asp-validation-for="MANUAL_YN" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AUTO_YN" class="control-label"></label>
+                <input asp-for="AUTO_YN" class="form-control" />
+                <span asp-validation-for="AUTO_YN" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MANAGE_ID" class="control-label"></label>
+                <input asp-for="MANAGE_ID" class="form-control" />
+                <span asp-validation-for="MANAGE_ID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CLIENT_STANDARD_ID" class="control-label"></label>
+                <input asp-for="CLIENT_STANDARD_ID" class="form-control" />
+                <span asp-validation-for="CLIENT_STANDARD_ID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="VULN_NAME" class="control-label"></label>
+                <input asp-for="VULN_NAME" class="form-control" />
+                <span asp-validation-for="VULN_NAME" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SORT_ORDER" class="control-label"></label>
+                <input asp-for="SORT_ORDER" class="form-control" />
+                <span asp-validation-for="SORT_ORDER" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RULE_YN" class="control-label"></label>
+                <input asp-for="RULE_YN" class="form-control" />
+                <span asp-validation-for="RULE_YN" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RATE" class="control-label"></label>
+                <input asp-for="RATE" class="form-control" />
+                <span asp-validation-for="RATE" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SCORE" class="control-label"></label>
+                <input asp-for="SCORE" class="form-control" />
+                <span asp-validation-for="SCORE" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="APPLY_TIME" class="control-label"></label>
+                <input asp-for="APPLY_TIME" class="form-control" />
+                <span asp-validation-for="APPLY_TIME" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DETAIL" class="control-label"></label>
+                <input asp-for="DETAIL" class="form-control" />
+                <span asp-validation-for="DETAIL" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DETAIL_PATH" class="control-label"></label>
+                <input asp-for="DETAIL_PATH" class="form-control" />
+                <span asp-validation-for="DETAIL_PATH" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="JUDGEMENT" class="control-label"></label>
+                <input asp-for="JUDGEMENT" class="form-control" />
+                <span asp-validation-for="JUDGEMENT" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EFFECT" class="control-label"></label>
+                <input asp-for="EFFECT" class="form-control" />
+                <span asp-validation-for="EFFECT" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="REMEDY" class="control-label"></label>
+                <input asp-for="REMEDY" class="form-control" />
+                <span asp-validation-for="REMEDY" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="REMEDY_PATH" class="control-label"></label>
+                <input asp-for="REMEDY_PATH" class="form-control" />
+                <span asp-validation-for="REMEDY_PATH" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="REFRRENCE" class="control-label"></label>
+                <input asp-for="REFRRENCE" class="form-control" />
+                <span asp-validation-for="REFRRENCE" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PARSER_CONTENTS" class="control-label"></label>
+                <input asp-for="PARSER_CONTENTS" class="form-control" />
+                <span asp-validation-for="PARSER_CONTENTS" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ORG_PARSER_CONTENTS" class="control-label"></label>
+                <input asp-for="ORG_PARSER_CONTENTS" class="form-control" />
+                <span asp-validation-for="ORG_PARSER_CONTENTS" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="APPLY_TARGET" class="control-label"></label>
+                <input asp-for="APPLY_TARGET" class="form-control" />
+                <span asp-validation-for="APPLY_TARGET" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="USE_YN" class="control-label"></label>
+                <input asp-for="USE_YN" class="form-control" />
+                <span asp-validation-for="USE_YN" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EXCEPT_CD" class="control-label"></label>
+                <input asp-for="EXCEPT_CD" class="form-control" />
+                <span asp-validation-for="EXCEPT_CD" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EXCEPT_TERM_TYPE" class="control-label"></label>
+                <input asp-for="EXCEPT_TERM_TYPE" class="form-control" />
+                <span asp-validation-for="EXCEPT_TERM_TYPE" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EXCEPT_TERM_FR" class="control-label"></label>
+                <input asp-for="EXCEPT_TERM_FR" class="form-control" />
+                <span asp-validation-for="EXCEPT_TERM_FR" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EXCEPT_TERM_TO" class="control-label"></label>
+                <input asp-for="EXCEPT_TERM_TO" class="form-control" />
+                <span asp-validation-for="EXCEPT_TERM_TO" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EXCEPT_REASON" class="control-label"></label>
+                <input asp-for="EXCEPT_REASON" class="form-control" />
+                <span asp-validation-for="EXCEPT_REASON" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EXCEPT_USER_ID" class="control-label"></label>
+                <input asp-for="EXCEPT_USER_ID" class="form-control" />
+                <span asp-validation-for="EXCEPT_USER_ID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EXCEPT_DT" class="control-label"></label>
+                <input asp-for="EXCEPT_DT" class="form-control" />
+                <span asp-validation-for="EXCEPT_DT" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CREATE_USER_ID" class="control-label"></label>
+                <input asp-for="CREATE_USER_ID" class="form-control" />
+                <span asp-validation-for="CREATE_USER_ID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CREATE_DT" class="control-label"></label>
+                <input asp-for="CREATE_DT" class="form-control" />
+                <span asp-validation-for="CREATE_DT" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UPDATE_USER_ID" class="control-label"></label>
+                <input asp-for="UPDATE_USER_ID" class="form-control" />
+                <span asp-validation-for="UPDATE_USER_ID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UPDATE_DT" class="control-label"></label>
+                <input asp-for="UPDATE_DT" class="form-control" />
+                <span asp-validation-for="UPDATE_DT" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="VULGROUP" class="control-label"></label>
+                <input asp-for="VULGROUP" class="form-control" />
+                <span asp-validation-for="VULGROUP" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="VULNO" class="control-label"></label>
+                <input asp-for="VULNO" class="form-control" />
+                <span asp-validation-for="VULNO" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="REMEDY_DETAIL" class="control-label"></label>
+                <input asp-for="REMEDY_DETAIL" class="form-control" />
+                <span asp-validation-for="REMEDY_DETAIL" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OVERVIEW" class="control-label"></label>
+                <input asp-for="OVERVIEW" class="form-control" />
+                <span asp-validation-for="OVERVIEW" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MANAGEMENT_VULN_YN" class="control-label"></label>
+                <input asp-for="MANAGEMENT_VULN_YN" class="form-control" />
+                <span asp-validation-for="MANAGEMENT_VULN_YN" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="VulnList">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

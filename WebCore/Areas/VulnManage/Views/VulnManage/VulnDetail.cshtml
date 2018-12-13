@@ -1,0 +1,250 @@
+﻿@model ApplicationCore.Entity.VulnModel.T_VULN
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@addTagHelper *, jQWidgets.AspNetCore.Mvc.TagHelpers
+@addTagHelper *, jQWidgets.AspNetCore.Mvc.Bootstrap.TagHelpers
+
+@{
+    ViewData["Title"] = "VulnDetail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>VulnDetail</h2>
+
+<div>
+    <h4>T_VULN</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.MANUAL_YN)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.MANUAL_YN)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.AUTO_YN)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.AUTO_YN)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.MANAGE_ID)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.MANAGE_ID)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CLIENT_STANDARD_ID)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CLIENT_STANDARD_ID)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.VULN_NAME)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.VULN_NAME)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.SORT_ORDER)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.SORT_ORDER)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.RULE_YN)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.RULE_YN)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.RATE)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.RATE)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.SCORE)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.SCORE)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.APPLY_TIME)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.APPLY_TIME)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.DETAIL)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DETAIL)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.DETAIL_PATH)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DETAIL_PATH)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.JUDGEMENT)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.JUDGEMENT)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.EFFECT)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.EFFECT)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.REMEDY)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.REMEDY)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.REMEDY_PATH)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.REMEDY_PATH)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.REFRRENCE)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.REFRRENCE)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.PARSER_CONTENTS)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PARSER_CONTENTS)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ORG_PARSER_CONTENTS)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ORG_PARSER_CONTENTS)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.APPLY_TARGET)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.APPLY_TARGET)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.USE_YN)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.USE_YN)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.EXCEPT_CD)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.EXCEPT_CD)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.EXCEPT_TERM_TYPE)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.EXCEPT_TERM_TYPE)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.EXCEPT_TERM_FR)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.EXCEPT_TERM_FR)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.EXCEPT_TERM_TO)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.EXCEPT_TERM_TO)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.EXCEPT_REASON)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.EXCEPT_REASON)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.EXCEPT_USER_ID)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.EXCEPT_USER_ID)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.EXCEPT_DT)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.EXCEPT_DT)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CREATE_USER_ID)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CREATE_USER_ID)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CREATE_DT)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CREATE_DT)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.UPDATE_USER_ID)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.UPDATE_USER_ID)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.UPDATE_DT)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.UPDATE_DT)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.VULGROUP)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.VULGROUP)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.VULNO)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.VULNO)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.REMEDY_DETAIL)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.REMEDY_DETAIL)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.OVERVIEW)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.OVERVIEW)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.MANAGEMENT_VULN_YN)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.MANAGEMENT_VULN_YN)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.GROUP_SEQNavigation)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.GROUP_SEQNavigation.GROUP_SEQ)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.VULN_SEQ">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
