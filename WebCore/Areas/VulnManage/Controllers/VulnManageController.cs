@@ -73,9 +73,10 @@ namespace WebCore.Areas.VulnManage.Controllers
         {
             var _ddlDiagType = _systemCodeRepository.GetCommonCodeDropDownList("DIAG_TYPE", true);
 
-            var vulnSearchModel = new VulnManageSearchModel();
-
-            vulnSearchModel.Diag_types = _ddlDiagType;
+            var vulnSearchModel = new VulnManageSearchModel
+            {
+                Diag_types = _ddlDiagType
+            };
 
             //var initVulnModels = new List<T_VULN>
             //{
